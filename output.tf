@@ -77,3 +77,9 @@ output "exampleoutput" {
 output "character_enemy_output" {
   value = local.character_enemy_map
 }
+output "character_mapping"
+{
+value={for index,character in local.characters: # Convert character list to a set
+      character => local.enemies_destroyed[index]
+}
+}
