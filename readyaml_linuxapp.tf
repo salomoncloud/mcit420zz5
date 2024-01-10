@@ -9,6 +9,7 @@ locals{
       }
     ]
 ])
+}
 resource "azurerm_service_plan" "batcha06sp" {
   for_each            ={for sp in local.linux_app_list: "${sp.name}"=>sp }
   name                = each.value.name
