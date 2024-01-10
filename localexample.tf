@@ -1,3 +1,7 @@
+variable "simple_nested_list" {
+  type    = list(list(string))
+  default = [["a", "b"], ["c", "d"], ["e", "f"]]
+}
 variable "nested_list" {
   type    = list(list(string))
   default = [["a", "b"], ["c", "d"], ["e", "f"]]
@@ -23,6 +27,7 @@ locals{
   character_enemy_map =   { for index,character in local.characters: # Convert character list to a set
       character => local.enemies_destroyed[index]
   }
+  simple_local_flattened_list = flatten(var.simple_nested_list)
   flattened_list = flatten(var.nested_list)
   flattened_map  = flatten([for k, v in var.nested_map : [for kk, vv in v : { group = k, key = kk, value = vv }]])
    
@@ -36,3 +41,8 @@ output "flattened_list_result" {
 output "flattened_map_result" {
   value = local.flattened_map
 }
+
+output "flattened_list_result" {
+  value = local.simple_local_flattened_list
+}
+
