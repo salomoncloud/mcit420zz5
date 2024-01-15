@@ -1,5 +1,5 @@
 locals{
-  linux_app=[for f in fileset("${path.module}/waffolder", "[^_]*.yaml") : yamldecode(file("${path.module}/configs/${f}"))]
+  linux_app=[for f in fileset("${path.module}/waffolder", "[^_]*.yaml") : yamldecode(file("${path.module}/waffolder/${f}"))]
   azurewafpolicy_list = flatten([
     for app in local.linux_app : [
       for azurewaf in try(app.azurewafpolicy, []) :{
