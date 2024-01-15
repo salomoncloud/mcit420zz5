@@ -15,6 +15,7 @@ resource "azurerm_resource_group" "example" {
 
 resource "azurerm_web_application_firewall_policy" "example" {
   for_each            ={for sp in local.azurewafpolicy_list: "${sp.name}"=>sp }
+  name                = each.value.name
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
 
