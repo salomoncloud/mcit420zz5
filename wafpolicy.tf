@@ -1,11 +1,9 @@
 locals{
   linux_app=[for f in fileset("${path.module}/waffolder", "[^_]*.yaml") : yamldecode(file("${path.module}/configs/${f}"))]
-  linux_app_list = flatten([
+  azurewafpolicy_list = flatten([
     for app in local.linux_app : [
-      for linuxapps in try(app.azurewafpolicy, []) :{
-        name=linuxapps.name
-        os_type=linuxapps.os_type
-        sku_name=linuxapps.sku_name     
+      for azurewaf in try(app.azurewafpolicy, []) :{
+        name=azurewaf.name
       }
     ]
 ])
@@ -16,7 +14,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_web_application_firewall_policy" "example" {
-  name                = "example-wafpolicy"
+  for_each            ={for sp in local.azurewafpolicy_list: "${sp.name}"=>sp }
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
 
