@@ -3,7 +3,7 @@ locals{
   loadbalancerlist = flatten([
     for app in local.loadbalancerconfig : [
       for loadbalancer in try(app.loadbalancerconfiguration, []) :{
-        name=loadbalancer.name
+        name=loadbalancer.publicipname
         allocation_method=loadbalancer.allocation_method
         frontend_ip_configuration=loadbalancer.frontend_ip_configuration
       }
