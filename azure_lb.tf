@@ -24,7 +24,7 @@ resource "azurerm_public_ip" "azurepublicipexample" {
 }
 
 resource "azurerm_lb" "azureloadbalancerexample" {
-  for_each            = azurrm_public_ip.azurepublicipexample
+  for_each            = azurerm_public_ip.azurepublicipexample
   name                = each.value.name
   location            = azurerm_resource_group.loadbalancerrg.location
   resource_group_name = azurerm_resource_group.loadbalancerrg.name
