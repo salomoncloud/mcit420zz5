@@ -2,4 +2,4 @@ loadbalancerconfiguration:
   - publicipname: newpublicip
   allocation_method: Static
   frontend_ip_configuration:
-    name: PublicIPAddress
+  -  name: PublicIPAddress
