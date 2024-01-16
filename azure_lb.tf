@@ -28,5 +28,8 @@ resource "azurerm_lb" "azureloadbalancerexample" {
   name                = each.value.name
   location            = azurerm_resource_group.loadbalancerrg.location
   resource_group_name = azurerm_resource_group.loadbalancerrg.name
-  frontend_ip_configuration=each.value.frontend_ip_configuration
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = each.value.id
+  }
 }
