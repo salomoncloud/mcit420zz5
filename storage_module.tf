@@ -5,7 +5,6 @@ module "storage_account" {
   resource_group_name   = "myresourcegroup"
   location              = "eastus"
   account_tier          = "Standard"
-  environment           = "dev"
 }
 
 output "storage_account_name" {
