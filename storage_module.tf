@@ -1,5 +1,5 @@
 module "storage_account" {
-  source = "git::https://github.com/myorg/terraform-azure-storage-account.git"
+  source = "./module_storage_account/"
 
   storage_account_name  = "mystorageaccount"
   resource_group_name   = "myresourcegroup"
