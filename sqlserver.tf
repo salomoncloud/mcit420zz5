@@ -2,8 +2,8 @@
 # Primary SQL Server
 resource "azurerm_sql_server" "primary" {
   name                         = "primary-sql-server"
-  resource_group_name          = azurerm_resource_group.example.name
-  location                     = azurerm_resource_group.example.location
+  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.azureresourcegroup.name
   version                      = "12.0"
   administrator_login          = "adminuser"
   administrator_login_password = "Password123!"
@@ -16,8 +16,8 @@ resource "azurerm_sql_server" "primary" {
 # Secondary SQL Server
 resource "azurerm_sql_server" "secondary" {
   name                         = "secondary-sql-server"
-  resource_group_name          = azurerm_resource_group.example.name
-  location                     = "West US"  # Secondary region
+  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.azureresourcegroup.name
   version                      = "12.0"
   administrator_login          = "adminuser"
   administrator_login_password = "Password123!"
@@ -26,8 +26,8 @@ resource "azurerm_sql_server" "secondary" {
 # Primary SQL Database
 resource "azurerm_sql_database" "primary" {
   name                = "primary-sql-db"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.azureresourcegroup.name
   server_name         = azurerm_sql_server.primary.name
   edition             = "Standard"
   compute_model       = "Serverless"
@@ -43,8 +43,8 @@ resource "azurerm_sql_database" "primary" {
 # Secondary SQL Database for Geo-Replication
 resource "azurerm_sql_database" "secondary" {
   name                = "secondary-sql-db"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = "West US"  # Secondary region
+  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.azureresourcegroup.name
   server_name         = azurerm_sql_server.secondary.name
   edition             = "Standard"
   compute_model       = "Serverless"
