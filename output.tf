@@ -33,7 +33,9 @@ for 1st element in -->inside the list variable winterlistOfSports--->"icehockey"
 for 2nd element in -->inside the list variable winterlistOfSports--->"snowboarding" 2nd element
 for 3rd element in -->inside the list variable winterlistOfSports--->"iceskating" 3rd element
 */
-
+output "summersportslist"{
+    value=[for summersport in local.summersports:summersport ]
+}
 output "sumofthreenumbers"{
     value=sum([for numberoutput in local.total_output: tonumber(numberoutput)])
 }
