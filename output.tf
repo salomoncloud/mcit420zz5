@@ -94,3 +94,15 @@ value={for index,character in local.characters: # Convert character list to a se
       character => local.enemies_destroyed[index]
 }
 }
+
+output "flattened_list_result" {
+  value = local.flattened_list
+}
+
+output "flattened_map_result" {
+  value = local.flattened_map
+}
+
+output "simple_flattened_list_result" {
+  value = local.simple_local_flattened_list
+}
