@@ -59,9 +59,6 @@ variable "whitespace_string" {
 output "trimmed_string" {
   value = trim(var.whitespace_string," ")
 }
-variable "original_string" {
-  default = "This is a sample string"
-}
 
 locals {
   contains_keyword = contains(var.original_string, "sample")
