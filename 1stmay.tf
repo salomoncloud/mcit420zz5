@@ -31,3 +31,39 @@ variable "additional_string" {
 output "concatenated_string" {
   value = "${var.original_string}${var.additional_string}"
 }
+variable "original_string" {
+  default = "Hello World"
+}
+
+# Function 6: Substring - Extract "World" from the string
+output "substring_example" {
+  value = substr(var.original_string, 6, -1)
+}
+
+# Function 7: Split the string by space into a list
+output "split_example" {
+  value = split(" ", var.original_string)
+}
+
+# Function 8: Join a list of strings into a single string with a separator
+variable "string_list" {
+  default = ["Hello", "World"]
+}
+
+output "join_example" {
+  value = join(", ", var.string_list)
+}
+
+# Function 9: Trim leading and trailing whitespace
+variable "whitespace_string" {
+  default = "  Trimmed String  "
+}
+
+output "trimmed_string" {
+  value = trim(var.whitespace_string)
+}
+
+# Function 19: Reverse the string
+output "reverse_example" {
+  value = reverse(var.original_string)
+}
