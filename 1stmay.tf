@@ -31,9 +31,6 @@ variable "additional_string" {
 output "concatenated_string" {
   value = "${var.original_string}${var.additional_string}"
 }
-variable "original_string" {
-  default = "Hello World"
-}
 
 # Function 6: Substring - Extract "World" from the string
 output "substring_example" {
