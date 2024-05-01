@@ -60,7 +60,6 @@ output "trimmed_string" {
   value = trim(var.whitespace_string," ")
 }
 
-# Function 19: Reverse the string
 output "reverse_example" {
-  value = reverse(var.original_string)
+  value = join("", reverse(split("", var.original_string)))
 }
