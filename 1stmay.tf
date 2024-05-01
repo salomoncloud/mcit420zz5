@@ -47,7 +47,7 @@ variable "string_list" {
   default = ["Montreal", "College","Information","Technology"]
 }
 output "reverse_examplesecond"{
-  value=reverse(string_list)
+  value=reverse(var.string_list)
 }
 output "join_example" {
   value = join(" ", var.string_list)
