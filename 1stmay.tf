@@ -57,7 +57,7 @@ variable "whitespace_string" {
 }
 
 output "trimmed_string" {
-  value = trim(var.whitespace_string)
+  value = trim(var.whitespace_string," ")
 }
 
 # Function 19: Reverse the string
