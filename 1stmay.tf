@@ -44,11 +44,11 @@ output "split_example" {
 
 # Function 8: Join a list of strings into a single string with a separator
 variable "string_list" {
-  default = ["Hello", "World"]
+  default = ["Montreal", "College","Information","Technology"]
 }
 
 output "join_example" {
-  value = join(", ", var.string_list)
+  value = join(" ", var.string_list)
 }
 
 # Function 9: Trim leading and trailing whitespace
