@@ -20,7 +20,7 @@ output "lowercase_string" {
 
 # Function 4: Replace "Hello" with "Hi"
 output "replaced_string" {
-  value = replace(var.original_string, "Montreal College Information Technology", "McGill University")
+  value = replace(var.original_string, " ", "")
 }
 
 # Function 5: Concatenate with another string
