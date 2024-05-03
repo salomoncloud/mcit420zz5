@@ -86,5 +86,5 @@ output "string_contains_sample" {
 }
 
 output "transformed_string" {
-  value = "${upper(trim("${var.input_string}", " "))} ${lower(trim("${replace(var.input_string, " ", "")}", " "))}"
+  value = "${upper(substr("${var.input_string}", 0, index("${var.input_string}", " ")))} ${lower(substr("${var.input_string}", index("${var.input_string}", " ")+1))}"
 }
