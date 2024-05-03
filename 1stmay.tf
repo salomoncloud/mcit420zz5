@@ -2,7 +2,10 @@
 variable "original_string" {
   default = "Montreal College Information Technology"
 }
-
+variable "input_string" {
+  type    = string
+  default = "upper LOWER"
+}
 # Function 1: Length of the string
 output "string_length" {
   value = length(var.original_string)
@@ -80,4 +83,9 @@ output "string_contains_no_sample" {
 
 output "string_contains_sample" {
   value = local.contains_keyword ? "String contains 'Montreal'" : "String does not contain 'Montreal'"
+}
+
+
+output "transformed_string" {
+  value = "${upper(trim("${var.input_string}"))} ${lower(trim("${replace(var.input_string, " ", " ")}"))}"
 }
