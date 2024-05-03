@@ -106,3 +106,6 @@ output "flattened_map_result" {
 output "simple_flattened_list_result" {
   value = local.simple_local_flattened_list
 }
+output "simple_nested_list_result_output" {
+  value = var.simple_nested_list
+}
