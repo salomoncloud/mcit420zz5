@@ -84,8 +84,3 @@ output "string_contains_no_sample" {
 output "string_contains_sample" {
   value = local.contains_keyword ? "String contains 'Montreal'" : "String does not contain 'Montreal'"
 }
-
-output "transformed_string" {
-  value = "${upper(substr("${var.input_string}", 0, index(split(" ", "${var.input_string}"), 0)))} ${lower(substr("${var.input_string}", index(split(" ", "${var.input_string}"), 0)+1))}"
-}
-
