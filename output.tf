@@ -39,6 +39,7 @@ output "summersportslist"{
 output "sumofthreenumbers"{
     value=sum([for numberoutput in local.total_output: tonumber(numberoutput)])
 }
+//========================================Kubernetes cluster creation start========================================
 output "id" {
   value = [
     for cluster in azurerm_kubernetes_cluster.batchabcd: cluster.id
@@ -79,6 +80,8 @@ output "host" {
     for cluster in azurerm_kubernetes_cluster.batchabcd: cluster.kube_config.0.host
   ]
 }
+//========================================Kubernetes cluster Output end========================================
+
 output "exampleoutput" {
   value =    { for character in local.characters: # Convert character list to a set
       character => local.enemies_destroyed
