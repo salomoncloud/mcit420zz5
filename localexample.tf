@@ -36,4 +36,16 @@ locals{
   sum_element2=30
 }
 
+variable "total_output" {
+  type    = list(string)
+  default = ["150", "150", "150"]
+}
 
+locals {
+  incremented_output = map(var.total_output, 
+    lambda x: tostring(tonumber(x) + 10)
+  )
+}
+output "incremented_output_show" {
+  value=local.incremented_output
+}
