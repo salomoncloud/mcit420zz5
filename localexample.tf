@@ -42,9 +42,9 @@ variable "total_output" {
 }
 
 locals {
-  incremented_output = map(var.total_output, 
-    lambda x: tostring(tonumber(x) + 10)
-  )
+  incremented_output = [
+    for value in var.total_output : tostring(tonumber(value) + 10)
+  ]
 }
 output "incremented_output_show" {
   value=local.incremented_output
