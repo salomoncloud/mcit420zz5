@@ -21,6 +21,7 @@ locals{
   lengthsa=length(local.servicename)
   lengthforum=length(local.forum)
   winterlistOfSports=["icehockey","snowboarding","iceskating"]
+  winter_sports_message = length(local.winterlistOfSports) > 3 ? "Winter sports list is extensive" : "Winter sports list is limited"
   total_output = ["150", "150", "150"]
 //==============================================Map example start===============================
   characters = ["luke", "yoda", "darth"]
@@ -48,4 +49,7 @@ locals {
 }
 output "incremented_output_show" {
   value=local.incremented_output
+}
+output "winter_sports_message" {
+  value = local.winter_sports_message
 }
