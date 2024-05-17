@@ -1,23 +1,25 @@
-locals{
-  waf_policy=[for f in fileset("${path.module}/waffolder", "[^_]*.yaml") : yamldecode(file("${path.module}/waffolder/${f}"))]
+locals {
+  waf_policy = [for f in fileset("${path.module}/waf", "[^_]*.yaml") : yamldecode(file("${path.module}/waf/${f}"))]
   azurewafpolicy_list = flatten([
     for app in local.waf_policy: [
-      for azurewaf in try(app.listofwafpolicy, []) :{
-        name=azurewaf.policyname
+      for azurewaf in try(app.listofwafpolicy, []) : {
+        name = azurewaf.policyname
       }
     ]
-])
-}
-resource "azurerm_resource_group" "example" {
-  name     = "example-rg"
-  location = "West Europe"
+  ])
+  first_ip = var.waf_ip_add[0]
 }
 
-resource "azurerm_web_application_firewall_policy" "example" {
-  for_each            ={for sp in local.azurewafpolicy_list: "${sp.name}"=>sp }
+output "first_ip_output" {
+  value = local.first_ip
+}
+
+# Define the resource using the local value
+resource "azurerm_web_application_firewall_policy" "my_first_waf" {
+  for_each            = { for sp in local.azurewafpolicy_list: "${sp.name}" => sp }
   name                = each.value.name
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.salomon.name
+  location            = azurerm_resource_group.salomon.location
 
   custom_rules {
     name      = "Rule1"
@@ -31,7 +33,7 @@ resource "azurerm_web_application_firewall_policy" "example" {
 
       operator           = "IPMatch"
       negation_condition = false
-      match_values       = ["192.168.1.0/24", "10.0.0.0/24"]
+      match_values       = var.waf_ip_add
     }
 
     action = "Block"
@@ -49,7 +51,7 @@ resource "azurerm_web_application_firewall_policy" "example" {
 
       operator           = "IPMatch"
       negation_condition = false
-      match_values       = ["192.168.1.0/24"]
+      match_values       = [local.first_ip] 
     }
 
     match_conditions {
